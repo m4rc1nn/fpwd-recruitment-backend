@@ -6,6 +6,11 @@ export const createTransaction = async (req, res) => {
         if (typeof amountEUR !== "number" || isNaN(amountEUR)) {
             return res.status(400).json({ error: "Invalid amountEUR" });
         }
+
+        if (amountEUR < 0 || amountEUR > 1000000) {
+            return res.status(400).json({ error: "Amount must be between 0 and 1000000" });
+        }
+
         const transaction = await transactionService.createTransaction(
             amountEUR
         );
