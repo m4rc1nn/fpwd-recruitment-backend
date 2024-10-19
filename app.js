@@ -1,16 +1,17 @@
-require('dotenv').config()
+import dotenv from 'dotenv';
+import express from 'express';
+import exchangeRateRoutes from './routes/exchangeRateRouter.js';
+import transactionRoutes from './routes/transactionRouter.js';
 
-const express = require('express');
-const exchangeRateRoutes = require('./routes/exchangeRate');
-// const transactionRoutes = require('./routes/transaction');
+dotenv.config();
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/api', exchangeRateRoutes);
-// app.use('/api', transactionRoutes);
+app.use("/api", exchangeRateRoutes);
+app.use('/api', transactionRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`);
-  });
+});

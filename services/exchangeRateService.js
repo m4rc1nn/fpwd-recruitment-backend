@@ -1,12 +1,13 @@
-require('dotenv').config()
+import dotenv from 'dotenv';
+import axiosInstance from '../config/axiosInstance.js';
 
-const axiosInstance = require('../config/axiosInstance');
+dotenv.config();
 
-exports.getExchangeRate = async () => {
+export const getExchangeRate = async () => {
     try {
-      const response = await axiosInstance.get('/');
-      return response.data.exchange_rate;
+        const response = await axiosInstance.get("/");
+        return response.data.exchange_rate;
     } catch (error) {
-      throw new Error('Failed to fetch exchange rate');
+        throw new Error("Failed to fetch exchange rate");
     }
-  };
+};
