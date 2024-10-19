@@ -14,7 +14,7 @@ class Transaction {
     }
 
     static getAll() {
-        return transactions;
+        return transactions.reverse();
     }
 }
 

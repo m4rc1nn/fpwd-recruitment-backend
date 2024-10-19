@@ -3,7 +3,7 @@ import Transaction from "../models/transaction.js";
 
 const createTransaction = async (amountEUR) => {
     const rate = await exchangeRateService.getExchangeRate();
-    const amountPLN = amountEUR * rate;
+    const amountPLN = (amountEUR * rate).toFixed(2);
 
     const transactionData = {
         amountEUR,
