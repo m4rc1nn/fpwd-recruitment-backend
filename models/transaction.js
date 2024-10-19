@@ -1,4 +1,4 @@
-let transactions = []; //simply saving transactions in memory, no database yet
+let transactions = []; //simply saving transactions in memory, no database
 
 class Transaction {
     constructor({ amountEUR, amountPLN, rate, timestamp }) {
