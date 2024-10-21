@@ -1,7 +1,7 @@
 export default {
   client: 'sqlite3',
   connection: {
-    filename: '/database/transactions.db',
+    filename: 'transactions.db',
   },
   useNullAsDefault: true,
 };
