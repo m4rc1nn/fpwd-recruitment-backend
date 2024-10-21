@@ -1,21 +1,29 @@
-let transactions = []; //simply saving transactions in memory, no database
+import knex from 'knex';
+import knexConfig from '../config/knexfile.js';
+
+const db = knex(knexConfig);
 
 class Transaction {
-    constructor({ amountEUR, amountPLN, rate, timestamp }) {
-        this.amountEUR = amountEUR;
-        this.amountPLN = amountPLN;
-        this.rate = rate;
-        this.timestamp = timestamp;
-    }
+  constructor({ amountEUR, amountPLN, rate, timestamp }) {
+    this.amountEUR = amountEUR;
+    this.amountPLN = amountPLN;
+    this.rate = rate;
+    this.timestamp = timestamp;
+  }
 
-    async save() {
-        await new Promise((resolve) => setTimeout(resolve, 500)); //simulate saving to database
-        transactions.push(this);
-    }
+  async save() {
+    await db('transactions').insert({
+      amountEUR: this.amountEUR,
+      amountPLN: this.amountPLN,
+      rate: this.rate,
+      timestamp: this.timestamp,
+    });
+  }
 
-    static getAll() {
-        return transactions.reverse();
-    }
+  static async getAll(limit = 10) {
+    const transactions = await db('transactions').select('*').orderBy('id', 'desc').limit(limit); //fake limit to last 10 transactions
+    return transactions;
+  }
 }
 
 export default Transaction;
